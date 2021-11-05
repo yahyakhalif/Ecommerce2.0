@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class SubCategoryModel extends Model
+class SubCategory extends Model
 {
     protected $table = 'tbl_subcategories';
 

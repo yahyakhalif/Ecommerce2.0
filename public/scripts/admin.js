@@ -4,7 +4,6 @@ $(function() {
         url: "http://localhost:8080/Admin/getCategories",
         success: function(result) {
             $.each(result, function(x, i) {
-                console.log(i.category_id + " " + i.category_name)
                 $('#categories-dropdown').append('<option value="' + i.category_id + '" >' + i.category_name + '</option>');
                 $('#category-dropdown').append('<option value="' + i.category_id + '" >' + i.category_name + '</option>');
             })
@@ -97,7 +96,6 @@ function newCategory() {
     $.ajax({
         url: 'http://localhost:8080/newCategory/' + cat,
         success: function(result) {
-            console.log(result, result.message)
             if (result.message == 1)
                 $('#categoryResult').show().text("* Category already exists");
             else if (result.message == 2)

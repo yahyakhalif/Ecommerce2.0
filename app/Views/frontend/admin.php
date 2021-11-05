@@ -83,13 +83,13 @@ ini_set('display_errors', '1');
                 <h3>Success</h3>
                 <p>New Admin Registered...</p>
             </div>
+            <h1>Register a New Admin</h1>
 
             <div class="w3-card-4 w3-section w3-animate-opacity">
 
-                <div class="w3-container w3-blue">
-                    <h1>Register a New Admin</h1>
-                    <!-- <p style="background-color: #fff;">Sign up to enjoy our delicious food!</p> -->
-                </div>
+                <!-- <div class="w3-container w3-blue"> -->
+                <!-- <p style="background-color: #fff;">Sign up to enjoy our delicious food!</p> -->
+                <!-- </div> -->
 
                 <form class="w3-container" method="POST" action="<?= base_url('/Registration/registerUser') ?>" id="regForm">
                     <br>
@@ -162,7 +162,7 @@ ini_set('display_errors', '1');
 
         <section id="sub-category-section" class="admin-section w3-animate-opacity" style="width: 80%; margin: auto; display: none;">
             <div class="w3-display-container w3-container w3-green w3-section w3-animate-opacity" style="display: none;" id="subcategory-msg">
-                <span onclick="this.parentElement.style.display='none'; $('#category-val').val('')" class="w3-button w3-large w3-display-topright">&times;</span>
+                <span onclick="this.parentElement.style.display='none'; $('#subcategory').val('')" class="w3-button w3-large w3-display-topright">&times;</span>
                 <h3>Success</h3>
                 <p>New Sub-Category Added...</p>
             </div>
@@ -180,21 +180,27 @@ ini_set('display_errors', '1');
         </section>
 
         <section id="product-section" class="admin-section w3-animate-opacity" style="width: 80%; margin: auto; display: none;">
+            <div class="w3-display-container w3-container w3-green w3-section w3-animate-opacity" style="display: none;" id="subcategory-msg">
+                <span onclick="this.parentElement.style.display='none'; document.getElementById('product-form').reset()" class="w3-button w3-large w3-display-topright">&times;</span>
+                <h3>Success</h3>
+                <p>New Product Added...</p>
+            </div>
+
             <h1>Add Product</h1>
-            <form enctype="multipart/form-data" class="w3-container w3-section">
-                <br>
-                <label for="category-dropdown">Choose Category</label>
-                <select name="" id="category-dropdown" class="w3-input" onchange="loadSubs()">
-                    <!-- <option value="">Choose an option</option> -->
-                </select><br>
-                <!-- <input class="w3-input" type="text" name="fname" id="first-name"> -->
-                <!-- <p id="fNameResult" class="w3-margin-bottom w3-text-red" hidden style="margin-top: 0;"></p><br> -->
+            <br>
+            <label for="category-dropdown">Choose Category</label>
+            <select name="" id="category-dropdown" class="w3-input" onchange="loadSubs()">
+                <!-- <option value="">Choose an option</option> -->
+            </select><br>
+            <!-- <input class="w3-input" type="text" name="fname" id="first-name"> -->
+            <!-- <p id="fNameResult" class="w3-margin-bottom w3-text-red" hidden style="margin-top: 0;"></p><br> -->
 
-                <label for="subcategory-dropdown">Pick a Sub-Category</label>
-                <select name="" id="subcategory-dropdown" class="w3-input">
-                    <!-- <option value="">Choose an option</option> -->
-                </select><br>
+            <label for="subcategory-dropdown">Pick a Sub-Category</label>
+            <select name="" id="subcategory-dropdown" class="w3-input">
+                <!-- <option value="">Choose an option</option> -->
+            </select><br>
 
+            <form enctype="multipart/form-data" class="w3-container w3-section" id="product-form">
 
                 <label for="product-name">Product Name:</label>
                 <input class="w3-input" type="text" name="productname" id="product-name">
@@ -206,22 +212,13 @@ ini_set('display_errors', '1');
                 <p id="descResult" class="w3-margin-bottom w3-text-red" hidden style="margin-top: 0;"></p><br>
 
 
-                <label for="price">Set Password</label>
-                <input class="w3-input" type="password" id="price" name="unitprice">
+                <label for="price">Price:</label>
+                <input class="w3-input" type="number" id="price" name="unitprice">
                 <p id="priceResult" class="w3-margin-bottom w3-text-red" hidden style="margin-top: 0;"></p><br>
 
-
-                <label for="password2">Confirm Password</label>
-                <input class="w3-input" type="password" id="password2" name="pword2">
-                <p id="pass2Result" class="w3-margin-bottom w3-text-red" hidden style="margin-top: 0;"></p><br>
-
-
-                <label for="genders">Gender</label>
-                <select id="genders" name="gender" class="w3-input">
-                    <option value="male" selected>Male</option>
-                    <option value="female">Female</option>
-                </select> -->
             </form>
+
+            <button class="w3-button w3-center w3-margin-left w3-teal w3-hover-black w3- w3-animate-opacity" onclick="newProduct()">Complete</button>
         </section>
 
         <script>
@@ -240,6 +237,32 @@ ini_set('display_errors', '1');
             //         });
             //     });
             // }
+
+            function newProduct() {
+                var product = $('#product-name').val();
+                var subcategory_id = $('#subcategory-dropdown').val()
+                var desc = $('#product-desc').val()
+                var price = $('#price').val()
+
+                const productDetails = [product, subcategory_id, desc, price];
+
+
+                $.ajax({
+                    url: 'http://localhost:8080/newProduct/',
+                    data: jQuery.param(productDetails),
+                    success: function(result) {
+                        if (result.message == 1)
+                            $('#prodResult').show().text("* Product already exists");
+                        else if (result.message == 2)
+                            $('#prodResult').show().text("* Error: Addition failed...");
+                        else
+                            $('#product-msg').show();
+                    },
+                    error: function() {
+                        $('#prodResult').show().text("* Error: Addition failed...");
+                    }
+                });
+            }
         </script>
 
     </main>

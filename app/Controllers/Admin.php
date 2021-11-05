@@ -2,9 +2,12 @@
 
 namespace App\Controllers;
 
-use App\Models\UserModel;
-use App\Models\CategoryModel;
-use App\Models\SubCategoryModel;
+ini_set('display_errors', '1');
+
+use App\Models\User;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\SubCategory;
 
 class Admin extends BaseController
 {
@@ -24,7 +27,7 @@ class Admin extends BaseController
 
     public function viewUsers(int $role = null)
     {
-        $users = new UserModel();
+        $users = new User();
 
         $allUsers = $users->getUsers();
 
@@ -40,7 +43,7 @@ class Admin extends BaseController
     public function newCategory(string $name)
     {
 
-        $category = new CategoryModel();
+        $category = new Category();
 
         $check = $category->checkCategory($name);
 
@@ -63,7 +66,7 @@ class Admin extends BaseController
 
     public function getCategories()
     {
-        $category = new CategoryModel();
+        $category = new Category();
 
         $categories = $category->getCategories();
 
@@ -74,7 +77,7 @@ class Admin extends BaseController
 
     public function newSub(string $name, int $id)
     {
-        $sub = new SubCategoryModel();
+        $sub = new SubCategory();
 
         $check = $sub->checkSub($name, $id);
 
@@ -95,10 +98,33 @@ class Admin extends BaseController
 
     public function getSubs($cat)
     {
-        $subcategory = new SubCategoryModel();
+        $subcategory = new SubCategory();
 
         $subs = $subcategory->getSubs($cat);
 
         return $this->response->setJSON($subs);
+    }
+
+    # PRODUCTS
+
+    public function newProduct(array $details)
+    {
+        $prod = new Product();
+
+        $check = $prod->checkProduct($details['product'], $details['subcategory_id']);
+
+        if ($check) {
+            if ($prod->insert($details) == true) {
+
+                $string = ['message' => 3];
+            } else
+
+                $string = ['message' => 2];
+        } else {
+
+            $string = ['message' => 1];
+        }
+
+        return $this->response->setJSON($string);
     }
 }
