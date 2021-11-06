@@ -9,6 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Lato: 100,300,400,700|Luckiest+Guy|Oxygen:300,400" rel="stylesheet">
     <link href="<?php echo base_url('/css/login.css') ?>" type="text/css" rel="stylesheet">
+    <script src="<?= base_url('/scripts/login.js') ?>"></script>
     <style>
         html,
         body,
@@ -114,7 +115,6 @@
                     $.ajax({
                         url: test_url,
                         success: function(result) {
-                            console.log(result.message);;
                             if (result.message == 'Invalid Credentials') {
                                 $("#invalid-msg").show()
                             } else if (result.message == 'Not a valid email') {
@@ -127,6 +127,9 @@
                                 else
                                     window.location.href = "http://localhost:8080/admin";
                             }
+                        },
+                        error: function() {
+                            $("#emailResult").show().text("* Login Authentication failed...");
                         }
                     });
 

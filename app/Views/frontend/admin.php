@@ -243,7 +243,7 @@ ini_set('display_errors', '1');
                 var product = $('#product-name').val();
                 var subcategory_id = $('#subcategory-dropdown').val()
                 var desc = $('#product-desc').val()
-                var price = $('#price').val()
+                var price = parseFloat(parseFloat($('#price').val()).toFixed(2))
 
                 $('#product-msg').hide()
                 $('#prodResult').hide()
@@ -252,7 +252,7 @@ ini_set('display_errors', '1');
 
 
                 $.ajax({
-                    url: 'http://localhost:8080/newProduct/' + product + '/' + desc + '/' + subcategory_id + '/' + price,
+                    url: 'http://localhost:8080/Admin/newProduct/' + product + '/' + desc + '/' + subcategory_id + '/' + price,
                     // type: 'POST',
                     // dataType: 'JSON',
                     // data: {

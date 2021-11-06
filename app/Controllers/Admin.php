@@ -112,11 +112,6 @@ class Admin extends BaseController
     {
         session();
         $prod = new Product();
-
-        // $price = $this->request->getVar('price');
-        // $sub_id = $this->request->getVar('subcategory_id');
-        // $name = $this->request->getVar('product');
-        // $desc = $this->request->getVar('desc');
         $date = date("Y/m/d H:i:s");
 
         $details = [
