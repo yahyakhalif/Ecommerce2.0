@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\UserModel;
+use App\Models\User;
 
 class Login extends BaseController
 {
@@ -23,7 +23,7 @@ class Login extends BaseController
     public function loginCheck($email = null, $password = null)
     {
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $userModel = new UserModel();
+            $userModel = new User();
             $data = $userModel->where('email', $email)->first();
 
             if ($data) {

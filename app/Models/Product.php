@@ -13,6 +13,7 @@ class Product extends Model
         'product_description',
         'unit-price',
         'available_quantity',
+        'subcategory_id',
         'created_at',
         'added_by'
     ];

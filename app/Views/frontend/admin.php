@@ -180,7 +180,8 @@ ini_set('display_errors', '1');
         </section>
 
         <section id="product-section" class="admin-section w3-animate-opacity" style="width: 80%; margin: auto; display: none;">
-            <div class="w3-display-container w3-container w3-green w3-section w3-animate-opacity" style="display: none;" id="subcategory-msg">
+
+            <div class="w3-display-container w3-container w3-green w3-section w3-animate-opacity" style="display: none;" id="product-msg">
                 <span onclick="this.parentElement.style.display='none'; document.getElementById('product-form').reset()" class="w3-button w3-large w3-display-topright">&times;</span>
                 <h3>Success</h3>
                 <p>New Product Added...</p>
@@ -192,7 +193,7 @@ ini_set('display_errors', '1');
             <select name="" id="category-dropdown" class="w3-input" onchange="loadSubs()">
                 <!-- <option value="">Choose an option</option> -->
             </select><br>
-            <!-- <input class="w3-input" type="text" name="fname" id="first-name"> -->
+            <!-- <input class="w3-input" type="text" name="fname" id="first-name">tainer w3-sectionw3-con -->
             <!-- <p id="fNameResult" class="w3-margin-bottom w3-text-red" hidden style="margin-top: 0;"></p><br> -->
 
             <label for="subcategory-dropdown">Pick a Sub-Category</label>
@@ -200,7 +201,7 @@ ini_set('display_errors', '1');
                 <!-- <option value="">Choose an option</option> -->
             </select><br>
 
-            <form enctype="multipart/form-data" class="w3-container w3-section" id="product-form">
+            <form enctype="multipart/form-data" class="" id="product-form">
 
                 <label for="product-name">Product Name:</label>
                 <input class="w3-input" type="text" name="productname" id="product-name">
@@ -244,12 +245,22 @@ ini_set('display_errors', '1');
                 var desc = $('#product-desc').val()
                 var price = $('#price').val()
 
+                $('#product-msg').hide()
+                $('#prodResult').hide()
+
                 const productDetails = [product, subcategory_id, desc, price];
 
 
                 $.ajax({
-                    url: 'http://localhost:8080/newProduct/',
-                    data: jQuery.param(productDetails),
+                    url: 'http://localhost:8080/newProduct/' + product + '/' + desc + '/' + subcategory_id + '/' + price,
+                    // type: 'POST',
+                    // dataType: 'JSON',
+                    // data: {
+                    //     'product': product,
+                    //     'subcategory_id': subcategory_id,
+                    //     'desc': desc,
+                    //     'price': price
+                    // },
                     success: function(result) {
                         if (result.message == 1)
                             $('#prodResult').show().text("* Product already exists");

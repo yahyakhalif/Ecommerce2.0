@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\SubCategory;
+use PhpParser\Node\Expr\Cast\Double;
 
 class Admin extends BaseController
 {
@@ -107,11 +108,27 @@ class Admin extends BaseController
 
     # PRODUCTS
 
-    public function newProduct(array $details)
+    public function newProduct(string $name, string $desc, int $sub_id, $price)
     {
+        session();
         $prod = new Product();
 
-        $check = $prod->checkProduct($details['product'], $details['subcategory_id']);
+        // $price = $this->request->getVar('price');
+        // $sub_id = $this->request->getVar('subcategory_id');
+        // $name = $this->request->getVar('product');
+        // $desc = $this->request->getVar('desc');
+        $date = date("Y/m/d H:i:s");
+
+        $details = [
+            'product_name' => $name,
+            'product_description' => $desc,
+            'unit_price' => doubleval($price),
+            'subcategory_id' => $sub_id,
+            'created_at' => $date,
+            'added_by' => $_SESSION['id']
+        ];
+
+        $check = $prod->checkProduct($name, $sub_id);
 
         if ($check) {
             if ($prod->insert($details) == true) {
