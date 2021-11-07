@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\SubCategory;
+use DateTimeZone;
 use PhpParser\Node\Expr\Cast\Double;
 
 class Admin extends BaseController
@@ -112,7 +113,7 @@ class Admin extends BaseController
     {
         session();
         $prod = new Product();
-        $date = date("Y/m/d H:i:s");
+        $date = date("Y/m/d H:i:s", 1);
 
         $details = [
             'product_name' => $name,

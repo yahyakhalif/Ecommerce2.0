@@ -9,9 +9,15 @@
 </head>
 
 <body>
-    <h1>Home Page</h1>
-    <p>Welcome back, <?php echo $_SESSION['name'] ?></p>
-    <p><a href="<?= base_url('/logout') ?>">Logout</a></p>
+    <nav></nav>
+    <main>
+        <section id="intro" class="home-section ">
+            <h1>Home Page</h1>
+            <p>Welcome back, <?php echo $_SESSION['name'] ?></p>
+            <p><a href="<?= base_url('/logout') ?>">Logout</a></p>
+        </section>
+    </main>
+
 </body>
 
 </html>
