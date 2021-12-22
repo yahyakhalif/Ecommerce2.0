@@ -66,7 +66,7 @@ ini_set('display_errors', '1');
 			    <div class="col-auto">
 				    <a class="navbar-brand" href="#">
 					    <img src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
-					    Yahya
+                        <?php echo $_SESSION['name'] ?>
 				    </a>
 			    </div>
 		    </div>

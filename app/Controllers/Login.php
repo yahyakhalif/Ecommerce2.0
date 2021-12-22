@@ -29,7 +29,6 @@ class Login extends BaseController
             $data = $userModel->where('email', $input['email'])->first();
 
             if ($data) {
-
                 $pass = $data['password'];
 
                 $authenticatePassword = $input['password'] == $pass;

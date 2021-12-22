@@ -76,13 +76,14 @@
                 data[object.name] = object.value;
             });
 
-            $(form).find($('button[type="submit"]')).prop('disabled', true).text('Please wait')
+            const submitButton = $(form).find($('button[type="submit"]'))
 
             $.ajax({
                 data: data,
                 method: 'POST',
                 url: '/loginCheck',
                 dataType: 'json',
+	            beforeSend: () => submitButton.prop('disabled', true).text('Please wait'),
                 success: result => {
                     if (result.message === 'Invalid Credentials') {
                         $('#alert').show()
@@ -95,7 +96,7 @@
                         $('#alert').show()
                         $('#alert span').text('No such Record');
                     } else {
-                        if (result.role === 2)
+                        if (result.role == 2)
                             window.location.href = "/";
                         else
                             window.location.href = "/admin";
@@ -103,7 +104,8 @@
                 },
                 error: xhr => {
                     console.log(xhr)
-                }
+                },
+	            complete: () => submitButton.prop('disabled', false).text('Sign In')
             })
         }
     })
