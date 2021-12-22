@@ -12,6 +12,9 @@ ini_set('display_errors', '1');
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Admin Page</title>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
     <script src="<?= base_url('scripts/admin.js') ?>"></script>
     <style>
         th,
@@ -43,21 +46,32 @@ ini_set('display_errors', '1');
 <body style="background-color: #eee;">
 
     <div class="w3-sidebar w3-bar-block w3-light-grey w3-card" style="width: 20%; float: left;">
-        <h5 class="w3-bar-item w3-black" style="margin-top: 0; margin-bottom: 0;">Users</h5>
-        <button class="w3-bar-item w3-button tablinks w3-blue" onclick="showSection(event, 'intro', 'tablinks', 'admin-section', ' w3-blue')">Home</button>
-        <button class="w3-bar-item w3-button tablinks" onclick="showSection(event, 'new-admin-section', 'tablinks', 'admin-section', ' w3-blue')">Add an Admin</button>
-        <button class="w3-bar-item w3-button tablinks" onclick="showSection(event, 'view-users-section', 'tablinks', 'admin-section', ' w3-blue'); loadTable(0)">View Users</button><br>
+        <h5 class="w3-bar-item w3-brown" style="margin-top: 0; margin-bottom: 0;">Users</h5>
+        <button class="w3-bar-item w3-button tablinks w3-grey" onclick="showSection(event, 'intro', 'tablinks', 'admin-section', ' w3-gray')">Home</button>
+        <button class="w3-bar-item w3-button tablinks" onclick="showSection(event, 'new-admin-section', 'tablinks', 'admin-section', ' w3-gray')">Add an Admin</button>
+        <button class="w3-bar-item w3-button tablinks" onclick="showSection(event, 'view-users-section', 'tablinks', 'admin-section', ' w3-gray'); loadTable(0)">View Users</button><br>
 
-        <h5 class="w3-bar-item w3-black" style="margin-bottom: 0;">Clothes</h5>
-        <button class="w3-bar-item w3-button tablinks" onclick="showSection(event, 'category-section', 'tablinks', 'admin-section', ' w3-blue')">Add New Category</button>
-        <button class="w3-bar-item w3-button tablinks" onclick="showSection(event, 'sub-category-section', 'tablinks', 'admin-section', ' w3-blue')">Add New Sub-Category</button>
-        <button class="w3-bar-item w3-button tablinks" onclick="showSection(event, 'product-section', 'tablinks', 'admin-section', ' w3-blue'); loadSubs()">Add Product</button><br>
+        <h5 class="w3-bar-item w3-brown" style="margin-bottom: 0;">Clothes</h5>
+        <button class="w3-bar-item w3-button tablinks" onclick="showSection(event, 'category-section', 'tablinks', 'admin-section', ' w3-gray')">Add New Category</button>
+        <button class="w3-bar-item w3-button tablinks" onclick="showSection(event, 'sub-category-section', 'tablinks', 'admin-section', ' w3-gray')">Add New Sub-Category</button>
+        <button class="w3-bar-item w3-button tablinks" onclick="showSection(event, 'product-section', 'tablinks', 'admin-section', ' w3-gray'); loadSubs()">Add Product</button><br>
 
         <a class="w3-bar-item w3-button w3-hover-red tablinks" href="<?= base_url('/logout') ?>">Logout</a>
-
     </div>
 
     <main style="width: 80%; float: right;">
+	    <nav class="navbar navbar-light bg-light">
+		    <div class="container-fluid justify-content-between">
+			    <div class="col-auto"></div>
+			    <div class="col-auto">
+				    <a class="navbar-brand" href="#">
+					    <img src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
+					    Yahya
+				    </a>
+			    </div>
+		    </div>
+	    </nav>
+
         <section id="intro" class="admin-section w3-animate-opacity" style="width: 80%; margin: auto;">
             <h1>Admin Page</h1>
             <p>Welcome back, <?= $_SESSION['name'] ?></p>
@@ -123,8 +137,10 @@ ini_set('display_errors', '1');
                         <option value="female">Female</option>
                     </select>
                 </form>
-                <button class="w3-button w3-center w3-margin-left w3-teal w3-hover-black w3-section" onclick="registerAdmin()">Complete</button>
-                <button class="w3-button w3-center w3-margin-right w3-red w3-hover-black w3-section w3-right" onclick="document.getElementById('regForm').reset()">Cancel</button>
+                <div class="d-flex justify-content-between p-3">
+	                <button class="btn btn-primary" onclick="registerAdmin()">Complete</button>
+	                <button class="btn btn-outline-secondary" onclick="document.getElementById('regForm').reset()">Cancel</button>
+                </div>
             </div>
         </section>
 
@@ -156,7 +172,7 @@ ini_set('display_errors', '1');
             <label for="category-val">Enter a new category name:</label>
             <input type="text" id="category-val" class="w3-input">
             <p id="categoryResult" class="w3-margin-bottom w3-text-red" hidden style="margin-top: 0;"></p><br>
-            <button class="w3-button w3-center w3-margin-left w3-teal w3-hover-black w3-section" onclick="newCategory()">Complete</button>
+            <button class="btn btn-primary" onclick="newCategory()">Complete</button>
 
         </section>
 
@@ -176,7 +192,7 @@ ini_set('display_errors', '1');
             <label for="subcategory">Enter a new sub-category:</label>
             <input type="text" id="subcategory" class="w3-input">
             <p id="subcategoryResult" class="w3-margin-bottom w3-text-red" hidden style="margin-top: 0;"></p><br>
-            <button class="w3-button w3-center w3-margin-left w3-teal w3-hover-black w3- w3-animate-opacity" onclick="newSub()">Complete</button>
+            <button class="btn btn-primary" onclick="newSub()">Complete</button>
         </section>
 
         <section id="product-section" class="admin-section w3-animate-opacity" style="width: 80%; margin: auto; display: none;">
@@ -219,7 +235,7 @@ ini_set('display_errors', '1');
 
             </form>
 
-            <button class="w3-button w3-center w3-margin-left w3-teal w3-hover-black w3- w3-animate-opacity" onclick="newProduct()">Complete</button>
+            <button class="btn btn-primary" onclick="newProduct()">Complete</button>
         </section>
 
         <script>

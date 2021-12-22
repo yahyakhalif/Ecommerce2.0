@@ -6,6 +6,12 @@ class Home extends BaseController
 {
     public function index()
     {
-        return view('welcome_message');
+        session();
+        $notThere['num'] = 1;
+
+        if (isset($_SESSION['name']))
+            echo view('/frontend/homepage', $_SESSION);
+        else
+            echo view('frontend/login', $notThere);
     }
 }

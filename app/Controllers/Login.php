@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\User;
+use CodeIgniter\HTTP\ResponseInterface;
 
 class Login extends BaseController
 {
@@ -16,21 +17,22 @@ class Login extends BaseController
     {
         session();
         session_destroy();
-        $data['logout'] = 1;
-        echo view('/frontend/login', $data);
+
+        return redirect()->to('/login');
     }
 
-    public function loginCheck($email = null, $password = null)
-    {
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    public function loginCheck(): ResponseInterface {
+        $input = $this->request->getVar();
+
+        if (filter_var($input['email'], FILTER_VALIDATE_EMAIL)) {
             $userModel = new User();
-            $data = $userModel->where('email', $email)->first();
+            $data = $userModel->where('email', $input['email'])->first();
 
             if ($data) {
 
                 $pass = $data['password'];
 
-                $authenticatePassword = ($password == $pass) ? true : false;
+                $authenticatePassword = $input['password'] == $pass;
 
                 if ($authenticatePassword) {
                     $ses_data = [

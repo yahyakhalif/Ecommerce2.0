@@ -1,144 +1,112 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Login - Phil's Soko</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Lato: 100,300,400,700|Luckiest+Guy|Oxygen:300,400" rel="stylesheet">
-    <link href="<?php echo base_url('/css/login.css') ?>" type="text/css" rel="stylesheet">
-    <script src="<?= base_url('/scripts/login.js') ?>"></script>
-    <style>
-        html,
-        body,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            font-family: "Lato", sans-serif;
-        }
-    </style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Sign In</title>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+	<!-- Main css -->
+	<link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
-    <ul class="navigation"><span class="my-name">SOKO la njue</span>
-        <li><a href="index.php">home</a></li>
-        <li><a href="menu.php">menu</a></li>
-        <li style="float: right;"><a href="<?= base_url('register') ?>">sign up</a></li>
-    </ul>
 
-    <main style="margin: auto; width: 60%;">
+<div class="main">
+	<!-- Sing in  Form -->
+	<section class="sign-in">
+		<div class="container">
+			<div class="signin-content">
+				<div class="signin-image">
+					<figure><img src="/images/signin-image.jpg" alt="sing up image"></figure>
+					<a href="/register" class="signup-image-link">Create an account</a>
+				</div>
 
-        <?php
-        if (isset($num)) : ?>
-            <div class="w3-display-container w3-container w3-blue w3-section">
-                <span onclick="this.parentElement.style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
-                <h3>Not Authenticated</h3>
-                <p>You have to login first...</p>
-            </div>
-        <?php endif ?>
+				<div class="signin-form">
+					<div id="alert" class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none">
+						<strong>Oops!</strong> <span>You should check in on some of the fields below.</span>
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+					<h2 class="form-title">Sign In</h2>
+					<form class="register-form" id="login-form">
+						<div class="form-group">
+							<label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+							<input type="text" name="email" id="email" placeholder="Your Email"/>
+						</div>
+						<div class="form-group">
+							<label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
+							<input type="password" name="password" id="password" placeholder="Password" required/>
+						</div>
+						<div class="form-group">
+							<input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
+							<label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+						</div>
+						<div class="form-group form-button">
+							<button type="submit" class="btn btn-warning">Sign In</button>
+						</div>
+					</form>
+					<div class="social-login">
+						<span class="social-label">Or login with</span>
+						<ul class="socials">
+							<li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
+							<li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
+							<li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
 
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="/vendors/jquery/jquery.min.js"></script>
+<script src="/vendors/jquery_validation/jquery.validation.min.js"></script>
+<script src="/vendors/jquery_validation/additional-methods.min.js"></script>
+<script>
+    $('#login-form').validate({
+        rules: {
+            email: 'required'
+        },
+        submitHandler: form => {
+            const data = {};
+            $(form).serializeArray().map(function (object) {
+                data[object.name] = object.value;
+            });
 
-        <?php
-        if (isset($logout)) : ?>
-            <div class="w3-display-container w3-container w3-green w3-section">
-                <span onclick="this.parentElement.style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
-                <h3>Success</h3>
-                <p>Logout Successful</p>
-            </div>
-        <?php endif ?>
+            $(form).find($('button[type="submit"]')).prop('disabled', true).text('Please wait')
 
-        <div class="w3-display-container w3-container w3-red w3-section w3-animate-opacity" id="invalid-msg" style="display: none;">
-            <span onclick="this.parentElement.style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
-            <h3>Invalid Credentials</h3>
-            <p>Try Again...</p>
-        </div>
-
-        <div class="w3-display-container w3-container w3-red w3-section w3-animate-opacity" id="no-record-msg" style="display: none;">
-            <span onclick="this.parentElement.style.display='none'" class="w3-button w3-large w3-display-topright">&times;</span>
-            <h3>Invalid Credentials</h3>
-            <p>User not registered to Phil's Soko...</p>
-        </div>
-
-        <div class="w3-card-4 w3-section w3-animate-opacity" style="background-color: #fff;">
-
-            <div class="w3-container w3-teal">
-                <h1>Login</h1>
-                <p>Log back in to order more food!</p>
-            </div>
-
-            <div class="w3-container">
-                <br>
-                <label for="emailaddress">Email</label>
-                <input class="w3-input" type="text" id="emailaddress" name="email" autocomplete="new-password">
-                <p id="emailResult" class="w3-margin-bottom w3-text-red" hidden style="margin-top: 0;"></p><br>
-
-                <label for="password1">Password</label>
-                <input class="w3-input" type="password" id="password1" name="password">
-                <p id="passResult" class="w3-margin-bottom w3-text-red" hidden style="margin-top: 0;"></p>
-
-                <button class="w3-button w3-center w3-teal w3-hover-black w3-section" name="Login" onclick="checkEmail()">Login</button>
-
-            </div>
-
-            <div class="w3-container w3-teal">
-                <h4>Don't Have An Account?</h4>
-                <p>Click <a href="<?= base_url('register') ?>">here</a> to sign up to Soko la Njue</p>
-            </div>
-
-            <script>
-                function checkEmail() {
-                    var email = $('#emailaddress').val();
-                    var pass = $("#password1").val();
-
-                    $("#invalid-msg").hide()
-                    $("#no-record-msg").hide()
-                    $("#emailResult").hide();
-                    $("#passResult").hide();
-
-                    if (email == '') {
-                        $("#emailResult").show().text("* Email field is empty");
-                        return;
-                    };
-
-                    if (pass == '') {
-                        $("#passResult").show().text("* Password field is empty");
-                        return;
-                    };
-
-                    var test_url = 'http://localhost:8080/loginCheck/' + email + '/' + pass;
-
-                    $.ajax({
-                        url: test_url,
-                        success: function(result) {
-                            if (result.message == 'Invalid Credentials') {
-                                $("#invalid-msg").show()
-                            } else if (result.message == 'Not a valid email') {
-                                $("#emailResult").show().text("* " + result.message);
-                            } else if (result.message == 'No such Record') {
-                                $("#no-record-msg").show()
-                            } else {
-                                if (result.role == 2)
-                                    window.location.href = "http://localhost:8080/homepage";
-                                else
-                                    window.location.href = "http://localhost:8080/admin";
-                            }
-                        },
-                        error: function() {
-                            $("#emailResult").show().text("* Login Authentication failed...");
-                        }
-                    });
-
+            $.ajax({
+                data: data,
+                method: 'POST',
+                url: '/loginCheck',
+                dataType: 'json',
+                success: result => {
+                    if (result.message === 'Invalid Credentials') {
+                        $('#alert').show()
+                        $('#alert span').text('Invalid Credentials');
+                    } else if (result.message === 'Not a valid email') {
+                        $('#alert').show()
+                        $('#alert span').text('Not a valid email');
+                        $("#emailResult").show().text("* " + result.message);
+                    } else if (result.message === 'No such Record') {
+                        $('#alert').show()
+                        $('#alert span').text('No such Record');
+                    } else {
+                        if (result.role === 2)
+                            window.location.href = "/";
+                        else
+                            window.location.href = "/admin";
+                    }
+                },
+                error: xhr => {
+                    console.log(xhr)
                 }
-            </script>
-
-        </div>
-    </main>
-
-</body>
-
+            })
+        }
+    })
+</script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>
