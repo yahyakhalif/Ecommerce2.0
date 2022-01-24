@@ -1,5 +1,4 @@
 $(function() {
-    // $('#category-dropdown').empty()
     $.ajax({
         url: "http://localhost:8080/Admin/getCategories",
         success: function(result) {
@@ -138,7 +137,8 @@ function newSub() {
     })
 }
 
-function loadTable(role) {
+function loadTable(role, place) {
+    $('#all-users').empty()
     $('#users').hide()
     $('#users-table').hide().empty()
     $(function() {
@@ -146,8 +146,12 @@ function loadTable(role) {
             url: "http://localhost:8080/Admin/viewUsers" + "/" + role,
             success: function(result) {
                 $.each(result, function(x, i) {
-                    $('#users').fadeIn()
-                    $('#users-table').fadeIn().append('<tr><td>' + i.user_id + '</td><td>' + i.first_name + '</td><td>' + i.last_name + '</td><td>' + i.email + '</td></tr>');
+                    if (place == 0){
+                        $('#users').fadeIn()
+                        $('#users-table').fadeIn().append('<tr><td>' + i.user_id + '</td><td>' + i.first_name + '</td><td>' + i.last_name + '</td><td>' + i.email + '</td></tr>');
+                    } else {
+                        $('#all-users').append('<option value="'+ i.user_id +'">' + i.first_name + " " + i.last_name + "</option>")
+                    }
                 })
             }
         });
@@ -158,12 +162,160 @@ function loadSubs() {
     var cat = $('#category-dropdown').val()
     $('#subcategory-dropdown').empty()
 
+    if (cat == '') return;
+
     $.ajax({
         url: "http://localhost:8080/Admin/getSubs/" + cat,
         success: function(result) {
             $.each(result, function(x, i) {
-                $('#subcategory-dropdown').append('<option value="' + i.subcategory_id + '" >' + i.subcategory_name + '</option>');
+                $('#subcategory-dropdown').append('<option value="' + i.subcategory_id + '">' + i.subcategory_name + '</option>');
             })
         }
     });
+}
+
+function changeOpt() {
+    var option = $('#edit-option').val()
+
+    if (option == 'gender') {
+        $('#gender-option').prop('disabled', false);
+        $('#new-val').prop('disabled', true);
+    } else {
+        $('#gender-option').prop('disabled', true);
+        $('#new-val').prop('disabled', false);
+    }
+}
+
+function newProduct() {
+    var product = $('#product-name').val();
+    var subcategory_id = $('#subcategory-dropdown').val()
+    var desc = $('#product-desc').val()
+    var price = parseFloat($('#price').val()).toFixed(2)
+
+// console.log(price, typeof price, typeof parseFloat(parseFloat($('#price').val()).toFixed(2)), parseFloat(parseFloat($('#price').val()).toFixed(2)))
+    $('#product-msg').hide()
+    $('#prodResult').hide()
+
+    $.ajax({
+        url: 'http://localhost:8080/newProduct/' + product + '/' + desc + '/' + subcategory_id + '/' + price,
+        success: function(result) {
+            if (result.message == 1)
+                $('#prodResult').show().text("* Product already exists");
+            else if (result.message == 2)
+                $('#prodResult').show().text("* Error: Addition failed...");
+            else
+                $('#product-msg').show();
+        },
+        error: function() {
+            $('#prodResult').show().text("* Error: Addition failed...");
+        }
+    });
+}
+
+function editUser() {
+    var id = $('#edit-user').val()
+    var option = $('#edit-option').val()
+    var new_value = ''
+
+    $('#edit-fail').hide()
+    $('#edit-msg').hide()
+    $('#valResult').hide()
+
+    if (option == 'gender')
+        new_value = $('#gender-option').val()
+    else
+        new_value = $('#new-val').val()
+
+    $.ajax({
+        url: 'http://localhost:8080/Admin/editUser/' + option + '/' + id + '/' + new_value,
+        success: function(result) {
+            if (result.message == 2)
+                $('#edit-fail').show()
+            else if (result.message == 3)
+                $('#valResult').show().text("* Not a valid email")
+            else if (result.message == 4)
+                $('#valResult').show().text("* Email already in use...")
+            else
+                $('#edit-msg').show()
+        },
+        error: function() {
+            $('#edit-fail').show()
+        }
+    })
+}
+
+function dynamicSearch(){
+    var searchTerm = $('#search').val();
+
+    if (searchTerm == '') return;
+
+    var xhttp = new XMLHttpRequest();
+    var url = 'ajaxdynamic.php?search_val='+searchTerm;
+
+    // Get response from server, and process it
+    xhttp.onreadystatechange = function() {
+        if(this.readyState == 4 && this.status == 200) {
+            var result = this.responseText;
+            var resultText = JSON.parse(result);
+            $("#searchresult").text(resultText);
+        }
+    };
+
+    xhttp.open('GET', url, true);
+    xhttp.send();
+
+}
+
+function checkname() {
+    var searchTerm = $("#edit-user").val()
+    $('#user-result').hide()
+
+    if (searchTerm == '') {
+        loadTable(0, 1)
+        return;
+    }
+
+    $.ajax({
+        url: 'http://localhost:8080/Admin/dynamicSearch/' + searchTerm,
+        success: function(result) {
+            $('#all-users').empty()
+            if (result.message.length == 0) {
+                $('#user-result').show().text("User not Found!")
+                loadTable(0, 1)
+                return;
+            }
+
+            $.each(result.message, function(x, i) {
+                $('#all-users').append('<option value="' + i.user_id + '">' + i.first_name + " " + i.last_name + "</option>")
+            })
+        },
+        error: function(result) {
+            console.error(result);
+        }
+    })
+}
+
+function newPayment() {
+    var payment = $('#payment').val().trim()
+    payment = payment.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+        return letter.toUpperCase()
+    });
+    var description = $('#payment-description').val()
+
+    $('#payment-result').hide()
+    $('#payment-success').hide()
+
+    $.ajax({
+        url: 'http://localhost:8080/newPayment/' + payment + '/' + description,
+        success: function(result) {
+            console.log(result, result.message)
+            if (result.message == 1)
+                $('#payment-success').show()
+            else
+                $('#payment-result').show().text('* Payment Type already exists')
+        },
+        error: function() {
+            $('#payment-result').show().text('* Addition failed')
+        }
+    })
 }

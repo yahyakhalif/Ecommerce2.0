@@ -1,610 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<meta name="description" content="" />
-	<meta name="author" content="" />
-	<title>Yahya Ecommerce</title>
-	<!-- Favicon-->
-	<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-	<!-- Font Awesome icons (free version)-->
-	<script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
-	<!-- Google fonts-->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-	<link href="/css/home.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="<?= base_url('/css/w3.css') ?>">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="<?= base_url('/scripts/homepage.js') ?>"></script>
+    <style>
+        .container {
+            font-size: 5em;
+            background-color: #a8a8a8;
+            color: white;
+            width: 8em;
+            height: 2em;
+            line-height: 2;
+            text-align: center;
+            font-family: Helvetica, Arial, sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .link {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        th,
+        td {
+            text-align: center;
+            padding: 15px;
+        }
+
+        th,
+        #total-cost {
+            border: solid black;
+            background-color: #000;
+            color: #fff;
+        }
+
+        table {
+            background-color: #fff;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        th {
+            background-color: black;
+            color: white;
+        }
+    </style>
 </head>
-<body id="page-top">
-<!-- Navigation-->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-	<div class="container">
-		<a class="navbar-brand" href="#page-top">Hi, <?php echo $_SESSION['name'] ?></a>
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-			Menu
-			<i class="fas fa-bars ms-1"></i>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarResponsive">
-			<ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-				<li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-				<li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
-				<li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-				<li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
-				<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-				<li class="nav-item"><a class="nav-link" href="<?= base_url('/logout') ?>">Sign Out</a></li>
-			</ul>
-		</div>
-	</div>
-</nav>
-<!-- Masthead-->
-<header class="masthead">
-	<div class="container">
-		<div class="masthead-subheading">Welcome To Our Studio!</div>
-		<div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
-		<a class="btn btn-primary btn-xl text-uppercase" href="#services">Tell Me More</a>
-	</div>
-</header>
-<!-- Services-->
-<section class="page-section" id="services">
-	<div class="container">
-		<div class="text-center">
-			<h2 class="section-heading text-uppercase">Services</h2>
-			<h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-		</div>
-		<div class="row text-center">
-			<div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
-                        </span>
-				<h4 class="my-3">E-Commerce</h4>
-				<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-			</div>
-			<div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
-                        </span>
-				<h4 class="my-3">Responsive Design</h4>
-				<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-			</div>
-			<div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
-                        </span>
-				<h4 class="my-3">Web Security</h4>
-				<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-			</div>
-		</div>
-	</div>
-</section>
-<!-- Portfolio Grid-->
-<section class="page-section bg-light" id="portfolio">
-	<div class="container">
-		<div class="text-center">
-			<h2 class="section-heading text-uppercase">Portfolio</h2>
-			<h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-		</div>
-		<div class="row">
-			<div class="col-lg-4 col-sm-6 mb-4">
-				<!-- Portfolio item 1-->
-				<div class="portfolio-item">
-					<a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
-						<div class="portfolio-hover">
-							<div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-						</div>
-						<img class="img-fluid" src="/images/portfolio/1.jpg" alt="..." />
-					</a>
-					<div class="portfolio-caption">
-						<div class="portfolio-caption-heading">Threads</div>
-						<div class="portfolio-caption-subheading text-muted">Illustration</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-sm-6 mb-4">
-				<!-- Portfolio item 2-->
-				<div class="portfolio-item">
-					<a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal2">
-						<div class="portfolio-hover">
-							<div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-						</div>
-						<img class="img-fluid" src="/images/portfolio/2.jpg" alt="..." />
-					</a>
-					<div class="portfolio-caption">
-						<div class="portfolio-caption-heading">Explore</div>
-						<div class="portfolio-caption-subheading text-muted">Graphic Design</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-sm-6 mb-4">
-				<!-- Portfolio item 3-->
-				<div class="portfolio-item">
-					<a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal3">
-						<div class="portfolio-hover">
-							<div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-						</div>
-						<img class="img-fluid" src="/images/portfolio/3.jpg" alt="..." />
-					</a>
-					<div class="portfolio-caption">
-						<div class="portfolio-caption-heading">Finish</div>
-						<div class="portfolio-caption-subheading text-muted">Identity</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
-				<!-- Portfolio item 4-->
-				<div class="portfolio-item">
-					<a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal4">
-						<div class="portfolio-hover">
-							<div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-						</div>
-						<img class="img-fluid" src="/images/portfolio/4.jpg" alt="..." />
-					</a>
-					<div class="portfolio-caption">
-						<div class="portfolio-caption-heading">Lines</div>
-						<div class="portfolio-caption-subheading text-muted">Branding</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-sm-6 mb-4 mb-sm-0">
-				<!-- Portfolio item 5-->
-				<div class="portfolio-item">
-					<a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal5">
-						<div class="portfolio-hover">
-							<div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-						</div>
-						<img class="img-fluid" src="/images/portfolio/5.jpg" alt="..." />
-					</a>
-					<div class="portfolio-caption">
-						<div class="portfolio-caption-heading">Southwest</div>
-						<div class="portfolio-caption-subheading text-muted">Website Design</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-sm-6">
-				<!-- Portfolio item 6-->
-				<div class="portfolio-item">
-					<a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal6">
-						<div class="portfolio-hover">
-							<div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-						</div>
-						<img class="img-fluid" src="/images/portfolio/6.jpg" alt="..." />
-					</a>
-					<div class="portfolio-caption">
-						<div class="portfolio-caption-heading">Window</div>
-						<div class="portfolio-caption-subheading text-muted">Photography</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-<!-- About-->
-<section class="page-section" id="about">
-	<div class="container">
-		<div class="text-center">
-			<h2 class="section-heading text-uppercase">About</h2>
-			<h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-		</div>
-		<ul class="timeline">
-			<li>
-				<div class="timeline-image"><img class="rounded-circle img-fluid" src="/images/about/1.jpg" alt="..." /></div>
-				<div class="timeline-panel">
-					<div class="timeline-heading">
-						<h4>2009-2011</h4>
-						<h4 class="subheading">Our Humble Beginnings</h4>
-					</div>
-					<div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
-				</div>
-			</li>
-			<li class="timeline-inverted">
-				<div class="timeline-image"><img class="rounded-circle img-fluid" src="/images/about/2.jpg" alt="..." /></div>
-				<div class="timeline-panel">
-					<div class="timeline-heading">
-						<h4>March 2011</h4>
-						<h4 class="subheading">An Agency is Born</h4>
-					</div>
-					<div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
-				</div>
-			</li>
-			<li>
-				<div class="timeline-image"><img class="rounded-circle img-fluid" src="/images/about/3.jpg" alt="..." /></div>
-				<div class="timeline-panel">
-					<div class="timeline-heading">
-						<h4>December 2015</h4>
-						<h4 class="subheading">Transition to Full Service</h4>
-					</div>
-					<div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
-				</div>
-			</li>
-			<li class="timeline-inverted">
-				<div class="timeline-image"><img class="rounded-circle img-fluid" src="/images/about/4.jpg" alt="..." /></div>
-				<div class="timeline-panel">
-					<div class="timeline-heading">
-						<h4>July 2020</h4>
-						<h4 class="subheading">Phase Two Expansion</h4>
-					</div>
-					<div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
-				</div>
-			</li>
-			<li class="timeline-inverted">
-				<div class="timeline-image">
-					<h4>
-						Be Part
-						<br />
-						Of Our
-						<br />
-						Story!
-					</h4>
-				</div>
-			</li>
-		</ul>
-	</div>
-</section>
-<!-- Team-->
-<section class="page-section bg-light" id="team">
-	<div class="container">
-		<div class="text-center">
-			<h2 class="section-heading text-uppercase">Our Amazing Team</h2>
-			<h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-		</div>
-		<div class="row">
-			<div class="col-lg-4">
-				<div class="team-member">
-					<img class="mx-auto rounded-circle" src="/images/team/1.jpg" alt="..." />
-					<h4>Parveen Anand</h4>
-					<p class="text-muted">Lead Designer</p>
-					<a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-					<a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-					<a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
-				</div>
-			</div>
-			<div class="col-lg-4">
-				<div class="team-member">
-					<img class="mx-auto rounded-circle" src="/images/team/2.jpg" alt="..." />
-					<h4>Diana Petersen</h4>
-					<p class="text-muted">Lead Marketer</p>
-					<a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-					<a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-					<a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
-				</div>
-			</div>
-			<div class="col-lg-4">
-				<div class="team-member">
-					<img class="mx-auto rounded-circle" src="/images/team/3.jpg" alt="..." />
-					<h4>Larry Parker</h4>
-					<p class="text-muted">Lead Developer</p>
-					<a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-					<a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-					<a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-8 mx-auto text-center"><p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p></div>
-		</div>
-	</div>
-</section>
-<!-- Clients-->
-<div class="py-5">
-	<div class="container">
-		<div class="row align-items-center">
-			<div class="col-md-3 col-sm-6 my-3">
-				<a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="/images/logos/microsoft.svg" alt="..." /></a>
-			</div>
-			<div class="col-md-3 col-sm-6 my-3">
-				<a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="/images/logos/google.svg" alt="..." /></a>
-			</div>
-			<div class="col-md-3 col-sm-6 my-3">
-				<a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="/images/logos/facebook.svg" alt="..." /></a>
-			</div>
-			<div class="col-md-3 col-sm-6 my-3">
-				<a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="/images/logos/ibm.svg" alt="..." /></a>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Contact-->
-<section class="page-section" id="contact">
-	<div class="container">
-		<div class="text-center">
-			<h2 class="section-heading text-uppercase">Contact Us</h2>
-			<h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-		</div>
-		<!-- * * * * * * * * * * * * * * *-->
-		<!-- * * SB Forms Contact Form * *-->
-		<!-- * * * * * * * * * * * * * * *-->
-		<!-- This form is pre-integrated with SB Forms.-->
-		<!-- To make this form functional, sign up at-->
-		<!-- https://startbootstrap.com/solution/contact-forms-->
-		<!-- to get an API token!-->
-		<form id="contactForm" data-sb-form-api-token="API_TOKEN">
-			<div class="row align-items-stretch mb-5">
-				<div class="col-md-6">
-					<div class="form-group">
-						<!-- Name input-->
-						<input class="form-control" id="name" type="text" placeholder="Your Name *" data-sb-validations="required" />
-						<div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
-					</div>
-					<div class="form-group">
-						<!-- Email address input-->
-						<input class="form-control" id="email" type="email" placeholder="Your Email *" data-sb-validations="required,email" />
-						<div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-						<div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
-					</div>
-					<div class="form-group mb-md-0">
-						<!-- Phone number input-->
-						<input class="form-control" id="phone" type="tel" placeholder="Your Phone *" data-sb-validations="required" />
-						<div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-group form-group-textarea mb-md-0">
-						<!-- Message input-->
-						<textarea class="form-control" id="message" placeholder="Your Message *" data-sb-validations="required"></textarea>
-						<div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
-					</div>
-				</div>
-			</div>
-			<!-- Submit success message-->
-			<!---->
-			<!-- This is what your users will see when the form-->
-			<!-- has successfully submitted-->
-			<div class="d-none" id="submitSuccessMessage">
-				<div class="text-center text-white mb-3">
-					<div class="fw-bolder">Form submission successful!</div>
-					To activate this form, sign up at
-					<br />
-					<a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-				</div>
-			</div>
-			<!-- Submit error message-->
-			<!---->
-			<!-- This is what your users will see when there is-->
-			<!-- an error submitting the form-->
-			<div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-			<!-- Submit Button-->
-			<div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">Send Message</button></div>
-		</form>
-	</div>
-</section>
-<!-- Footer-->
-<footer class="footer py-4">
-	<div class="container">
-		<div class="row align-items-center">
-			<div class="col-lg-4 text-lg-start">Copyright &copy; Your Website 2021</div>
-			<div class="col-lg-4 my-3 my-lg-0">
-				<a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-				<a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-				<a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
-			</div>
-			<div class="col-lg-4 text-lg-end">
-				<a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
-				<a class="link-dark text-decoration-none" href="#!">Terms of Use</a>
-			</div>
-		</div>
-	</div>
-</footer>
-<!-- Portfolio Modals-->
-<!-- Portfolio item 1 modal popup-->
-<div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="close-modal" data-bs-dismiss="modal"><img src="/images/close-icon.svg" alt="Close modal" /></div>
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-lg-8">
-						<div class="modal-body">
-							<!-- Project details-->
-							<h2 class="text-uppercase">Project Name</h2>
-							<p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-							<img class="img-fluid d-block mx-auto" src="/images/portfolio/1.jpg" alt="..." />
-							<p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-							<ul class="list-inline">
-								<li>
-									<strong>Client:</strong>
-									Threads
-								</li>
-								<li>
-									<strong>Category:</strong>
-									Illustration
-								</li>
-							</ul>
-							<button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-								<i class="fas fa-times me-1"></i>
-								Close Project
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Portfolio item 2 modal popup-->
-<div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="close-modal" data-bs-dismiss="modal"><img src="/images/close-icon.svg" alt="Close modal" /></div>
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-lg-8">
-						<div class="modal-body">
-							<!-- Project details-->
-							<h2 class="text-uppercase">Project Name</h2>
-							<p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-							<img class="img-fluid d-block mx-auto" src="/images/portfolio/2.jpg" alt="..." />
-							<p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-							<ul class="list-inline">
-								<li>
-									<strong>Client:</strong>
-									Explore
-								</li>
-								<li>
-									<strong>Category:</strong>
-									Graphic Design
-								</li>
-							</ul>
-							<button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-								<i class="fas fa-times me-1"></i>
-								Close Project
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Portfolio item 3 modal popup-->
-<div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="close-modal" data-bs-dismiss="modal"><img src="/images/close-icon.svg" alt="Close modal" /></div>
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-lg-8">
-						<div class="modal-body">
-							<!-- Project details-->
-							<h2 class="text-uppercase">Project Name</h2>
-							<p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-							<img class="img-fluid d-block mx-auto" src="/images/portfolio/3.jpg" alt="..." />
-							<p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-							<ul class="list-inline">
-								<li>
-									<strong>Client:</strong>
-									Finish
-								</li>
-								<li>
-									<strong>Category:</strong>
-									Identity
-								</li>
-							</ul>
-							<button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-								<i class="fas fa-times me-1"></i>
-								Close Project
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Portfolio item 4 modal popup-->
-<div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="close-modal" data-bs-dismiss="modal"><img src="/images/close-icon.svg" alt="Close modal" /></div>
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-lg-8">
-						<div class="modal-body">
-							<!-- Project details-->
-							<h2 class="text-uppercase">Project Name</h2>
-							<p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-							<img class="img-fluid d-block mx-auto" src="/images/portfolio/4.jpg" alt="..." />
-							<p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-							<ul class="list-inline">
-								<li>
-									<strong>Client:</strong>
-									Lines
-								</li>
-								<li>
-									<strong>Category:</strong>
-									Branding
-								</li>
-							</ul>
-							<button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-								<i class="fas fa-times me-1"></i>
-								Close Project
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Portfolio item 5 modal popup-->
-<div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="close-modal" data-bs-dismiss="modal"><img src="/images/close-icon.svg" alt="Close modal" /></div>
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-lg-8">
-						<div class="modal-body">
-							<!-- Project details-->
-							<h2 class="text-uppercase">Project Name</h2>
-							<p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-							<img class="img-fluid d-block mx-auto" src="/images/portfolio/5.jpg" alt="..." />
-							<p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-							<ul class="list-inline">
-								<li>
-									<strong>Client:</strong>
-									Southwest
-								</li>
-								<li>
-									<strong>Category:</strong>
-									Website Design
-								</li>
-							</ul>
-							<button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-								<i class="fas fa-times me-1"></i>
-								Close Project
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Portfolio item 6 modal popup-->
-<div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="close-modal" data-bs-dismiss="modal"><img src="/images/close-icon.svg" alt="Close modal" /></div>
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-lg-8">
-						<div class="modal-body">
-							<!-- Project details-->
-							<h2 class="text-uppercase">Project Name</h2>
-							<p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-							<img class="img-fluid d-block mx-auto" src="/images/portfolio/6.jpg" alt="..." />
-							<p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-							<ul class="list-inline">
-								<li>
-									<strong>Client:</strong>
-									Window
-								</li>
-								<li>
-									<strong>Category:</strong>
-									Photography
-								</li>
-							</ul>
-							<button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-								<i class="fas fa-times me-1"></i>
-								Close Project
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Bootstrap core JS-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Core theme JS-->
-<script src="/js/scripts.js"></script>
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-<!-- * *                               SB Forms JS                               * *-->
-<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+<body>
+    <nav class="w3-sidebar w3-bar-block w3-light-grey w3-card" style="width: 20%; float: left;">
+        <h5 class="w3-bar-item w3-black" style="margin-top: 0; margin-bottom: 0;">Users</h5>
+        <button class="w3-bar-item w3-button tablinks w3-blue" onclick="showSection(event, 'intro', 'tablinks', 'home-section', ' w3-blue')">Home</button><br>
+
+        <h5 class="w3-bar-item w3-black" style="margin-top: 0; margin-bottom: 0;">Wallet</h5>
+        <button class="w3-bar-item w3-button tablinks" onclick="showSection(event, 'wallet-section', 'tablinks', 'home-section', ' w3-blue'); getAmount(<?= $_SESSION['id'] ?>)">Add to Wallet</button>
+        <button class="w3-bar-item w3-button tablinks" onclick="showSection(event, 'view-products-section', 'tablinks', 'home-section', ' w3-blue'); getCats();">View Products</button>
+        <button class="w3-bar-item w3-button tablinks" onclick="showSection(event, 'view-cart-section', 'tablinks', 'home-section', ' w3-blue');">View Cart <span class="w3-orange w3-round w3-text-white"><b><?php echo (count($_SESSION['orders']) > 0) ? count($_SESSION['orders']) : "" ?></b></span></button><br>
+
+        <a class="w3-bar-item w3-button w3-hover-red tablinks" href="<?= base_url('/logout') ?>">Logout</a>
+    </nav>
+
+    <main style="width: 80%; float: right;">
+
+        <?php if (isset($delete)) :  ?>
+            <div class="w3-section w3-center w3-container w3-blue w3-display-container">
+                <span onclick="this.parentElement.style.display='none';" class="w3-button w3-large w3-display-topright">&times;</span>
+                <p>Product Removed from Cart...</p>
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($complete)) :  ?>
+            <div class="w3-section w3-center w3-container w3-blue w3-display-container">
+                <span onclick="this.parentElement.style.display='none';" class="w3-button w3-large w3-display-topright">&times;</span>
+                <h1>Order Completed!</h1>
+                <p>Thank you for shopping with us!</p>
+            </div>
+        <?php endif; ?>
+
+        <section id="intro" class="home-section w3-animate-opacity">
+            <h1>Home Page</h1>
+            <p>Welcome back, <?php echo $_SESSION['name'] ?></p>
+        </section>
+
+        <!-- <div class="container">
+            W3Docs
+            <a href="https://www.w3docs.com/" target="_blank">
+                <span class="link"></span>
+            </a>
+        </div> -->
+
+        <section id="wallet-section" class="home-section w3-animate-opacity" style="display: none;">
+
+            <div class="w3-display-container w3-container w3-green w3-section" style="display: none;" id="wallet-msg">
+                <span onclick="this.parentElement.style.display='none'; $('#wallet').val('')" class="w3-button w3-large w3-display-topright">&times;</span>
+                <h3>Success</h3>
+                <p>Funds have been added to your wallet...</p>
+            </div>
+
+            <h1>Add to Wallet</h1>
+
+            <label for="wallet">Enter amount</label>
+            <input type="text" class="w3-input" id="wallet">
+            <p id="walletResult" class="w3-margin-bottom w3-text-red" hidden style="margin-top: 0;"></p><br>
+
+            <button class="w3-button w3-center w3-margin-left w3-teal w3-hover-black w3-section" onclick="addToWallet(<?= $_SESSION['id'] ?>); getAmount(<?= $_SESSION['id'] ?>)">Add to Wallet</button>
+
+            <h1>Total Amount</h1>
+            <p id="wallet-amount" class="w3-section">Amount: </p>
+
+        </section>
+
+        <section id="view-products-section" class="home-section w3-animate-opacity" style="display: none;">
+
+            <div class="w3-display-container w3-container w3-green w3-section" style="display: none;" id="cart-msg">
+                <span onclick="this.parentElement.style.display='none'; $('#wallet').val('')" class="w3-button w3-large w3-display-topright">&times;</span>
+                <h3>Success</h3>
+                <p>Product has been added to your cart...</p>
+            </div>
+
+            <div class="w3-display-container w3-container w3-blue w3-section" style="display: none;" id="already-in-cart-msg">
+                <span onclick="this.parentElement.style.display='none'; $('#wallet').val('')" class="w3-button w3-large w3-display-topright">&times;</span>
+                <!-- <h3>Success</h3> -->
+                <p>Product already added to Cart</p>
+            </div>
+
+            <h1>View Products</h1>
+
+            <label for="category-list">Choose Category</label>
+            <select name="" id="category-list" onchange="getSubs()"></select>
+
+            <label for="sub-list">Choose Sub-Category</label>
+            <select name="" id="sub-list" onchange="getProducts()"></select>
+
+            <label for="product-list">Choose Products</label>
+            <select name="" id="product-list"></select>
+
+            <button onclick="addToCart()" class="w3-button w3-center w3-blue">Add to Cart</button>
+
+            <p hidden id="product-result" class="w3-text-red"></p>
+
+            <div class="w3-row-padding" id="product-images">
+                <!-- LOAD PRODUCT IMAGES HERE -->
+            </div>
+        </section>
+
+        <section id="view-cart-section" class="home-section w3-animate-opacity" style="display: none;">
+            <h1>Cart</h1>
+            <form method="POST" action="<?= base_url('Homepage/updateOrder') ?>" class="w3-center">
+                <table>
+                    <thead>
+                        <th>Food</th>
+                        <th>Quantity</th>
+                        <th>Remove from Cart</th>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $j = 1;
+
+                        foreach ($_SESSION['orders'] as $key => $value) {
+
+                        ?>
+                            <tr>
+                                <td><?php echo $value ?></td>
+                                <td><input type="number" id="order-value" value="1" min="1" name="<?php echo "order" . $j++ ?>" /></td>
+                                <td><button type="submit" name="delete-order" value="<?php echo $key ?>" class="w3-button w3-red">&times;</td>
+
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                </table><br>
+                <input type="submit" value="Complete Order" class="w3-button w3-blue w3-hover-black" name="complete-order" />
+            </form>
+        </section>
+    </main>
+
+    <script>
+        function addToCart() {
+            var product = $('#product-list').val() ?? null
+
+            $('#product-result').hide()
+            $('#cart-msg').hide()
+            $('#already-in-cart-msg').hide()
+
+            if (product == null) {
+                $('#product-result').show().text('* No Product Selected')
+                return;
+            }
+
+            $.ajax({
+                url: 'http://localhost:8080/Homepage/addToCart/' + product,
+                success: function(result) {
+                    if (result.message == 1)
+                        $('#cart-msg').show()
+                    else
+                        $('#already-in-cart-msg').show()
+                },
+                error: function() {
+                    $('#product-result').show().text('* Error in adding to Cart')
+                }
+            })
+        }
+    </script>
+
 </body>
+
 </html>

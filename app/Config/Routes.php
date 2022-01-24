@@ -41,6 +41,14 @@ $routes->post('/regCheck', 'Registration::regCheck/$1');
 $routes->get('/newCategory/(.+)', 'Admin::newCategory/$1');
 $routes->get('/subcategory/(.+)', 'Admin::newSub/$1');
 $routes->get('/newProduct/(.+)', 'Admin::newProduct');
+
+$routes->get('/homepage', 'Homepage::index');
+$routes->get('/loginCheck/(.+)', 'Login::loginCheck/$1');
+$routes->get('/regCheck/(.+)', 'Registration::regCheck/$1');
+$routes->get('/subcategory/(:any)/(:num)', 'Admin::newSub/$1/$2');
+$routes->get('/newProduct/(.+)', 'Admin::newProduct/$1/$2/$3/$4');
+$routes->get('/wallet/(:num)/(:num)', 'Homepage::wallet/$1/$2');
+$routes->get('/newPayment/(:any)', 'Admin::newPayment/$1/$2');
 // $routes->match(['get', 'post'], 'frontend/login', 'Form::index');
 
 /*
@@ -59,3 +67,8 @@ $routes->get('/newProduct/(.+)', 'Admin::newProduct');
 if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
     require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }
+
+
+//  API ROUTES
+$routes->post('api/login', 'Login::apiLogin');
+$routes->post('api/register', 'Register::apiRegister');

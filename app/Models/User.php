@@ -9,37 +9,34 @@ class User extends Model
 {
 
     protected $table = 'tbl_users';
+    protected $primaryKey = 'user_id';
 
     protected $allowedFields = [
         # 'user_id',
         'first_name',
         'last_name',
         'email',
-        'password',
+        '`password`',
         'gender',
         'role'
     ];
 
-    public function getUsers(/* $id = false, */int $role = null)
-    {
-        // if ($id === false) {
-        // }
+    protected $deletedField = 'is_deleted';
 
-        if ($role === null || $role == 0) {
-            return $this->select('user_id, first_name, last_name, email')->findAll();
-        }
+    public function getUsers(int $role = null)
+    {
+
+        if ($role === null || $role == 0)
+            return $this->select('user_id, first_name, last_name, email')
+                ->findAll();
+
 
         return $this->select('user_id, first_name, last_name, email')
             ->where(['role' => $role])
             ->get()->getResultArray();
-
-
-        // return $this->asArray()
-        //     ->where(['user_id' => $id])
-        //     ->first();
     }
 
-    public function createUser(array $newUser)
+    public function createUser(array $newUser): mixed
     {
 
         if ($this->insert($newUser, true) == true)
@@ -48,7 +45,15 @@ class User extends Model
             return false;
     }
 
-    public function deleteUser(int $id)
+    public function editUser(array $newValue, int $id): bool
+    {
+        if ($this->update($id, $newValue) == true)
+            return true;
+
+        return false;
+    }
+
+    public function deleteUser(int $id): bool
     {
 
         if ($this->delete(['user_id' => $id]) == true)

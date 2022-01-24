@@ -2,11 +2,19 @@
 
 namespace App\Controllers;
 
+use App\Libraries\OAuth\OAuth;
 use App\Models\User;
+use App\Models\UserLogin;
+use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\HTTP\ResponseInterface;
+use DateTime;
+use DateTimeZone;
+use OAuth2\Request;
 
 class Login extends BaseController
 {
+    use ResponseTrait;
+
     public function index()
     {
         echo view('frontend/login');
@@ -34,11 +42,24 @@ class Login extends BaseController
                 $authenticatePassword = $input['password'] == $pass;
 
                 if ($authenticatePassword) {
+                    $user = new UserLogin();
+                    $timezone = new DateTimeZone('Africa/Nairobi');
+                    $date = new DateTime('now', $timezone);
+
+                    $login = [
+                        'user_id' => $data['user_id'],
+                        'user_ip' => $this->request->getIPAddress(),
+                        'login_time' => $date->format('Y-m-d H:i:s')
+                    ];
+                    $login_id = $user->login($login);
+
                     $ses_data = [
                         'id' => $data['user_id'],
                         'name' => $data['first_name'],
                         'email' => $data['email'],
-                        'isLoggedIn' => TRUE
+                        'isLoggedIn' => TRUE,
+                        'orders' => [],
+                        'login_id' => $login_id
                     ];
 
                     $session = session();
@@ -49,7 +70,6 @@ class Login extends BaseController
                         'role' => $data['role']
                     ];
                 } else {
-
                     $string = ["message" => "Invalid Credentials"];
                 }
             } else {
@@ -61,5 +81,17 @@ class Login extends BaseController
         }
 
         return $this->response->setJSON($string);
+    }
+
+    public function apiLogin() {
+        $oAuth = new OAuth();
+
+        $request = new Request();
+        $response = $oAuth->server->handleTokenRequest($request->createFromGlobals());
+
+        $code = $response->getStatusCode();
+        $body = $response->getResponseBody();
+
+        return $this->respond(json_decode($body), $code);
     }
 }
