@@ -70,5 +70,12 @@ if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
 
 
 //  API ROUTES
-$routes->post('api/login', 'Login::apiLogin');
-$routes->post('api/register', 'Register::apiRegister');
+$routes->post('/api/login', 'Login::apiLogin');
+$routes->post('/api/register', 'Registration::apiRegister');
+
+$routes->get('/api/users', 'UserController::index');
+$routes->get('/api/users/(:segment)', 'UserController::show/$1');
+$routes->get('/api/products/', 'ProductController::index');
+$routes->get('/api/products/(:num)', 'ProductController::show/$1', ['filter' => 'basic_auth']);
+$routes->get('/api/products/user/(:num)', 'ProductController::userProducts/$1', ['filter' => 'oauth']);
+$routes->get('/api/products/sales-volume', 'ProductController::salesVolume', ['filter' => 'oauth']);

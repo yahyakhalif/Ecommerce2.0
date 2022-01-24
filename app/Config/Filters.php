@@ -2,6 +2,8 @@
 
 namespace Config;
 
+use App\Filters\BasicAuthFilter;
+use App\Filters\LogRequestFilter;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
@@ -19,6 +21,8 @@ class Filters extends BaseConfig
         'csrf'     => CSRF::class,
         'toolbar'  => DebugToolbar::class,
         'honeypot' => Honeypot::class,
+        'log_request' => LogRequestFilter::class,
+        'basic_auth'  => BasicAuthFilter::class,
     ];
 
     /**
@@ -58,5 +62,8 @@ class Filters extends BaseConfig
      *
      * @var array
      */
-    public $filters = [];
+    public $filters = [
+        'log_request' => ['after' => ['api*']],
+        'basic_auth'  => ['before' => ['api/users*', 'api/transactions*', 'api/products']]
+    ];
 }

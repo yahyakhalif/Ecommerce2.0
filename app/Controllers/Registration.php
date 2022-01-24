@@ -2,11 +2,17 @@
 
 namespace App\Controllers;
 
+use App\Models\ApiUser;
 use App\Models\Role;
 use App\Models\User;
+use CodeIgniter\API\ResponseTrait;
+use Exception;
+use Illuminate\Support\Facades\Password;
 
 class Registration extends BaseController
 {
+    use ResponseTrait;
+
     public function index()
     {
         return view('frontend/register');
@@ -58,11 +64,12 @@ class Registration extends BaseController
         return $this->response->setJSON($string);
     }
 
-    public function apiRegister() {
+    public function apiRegister()
+    {
         $rules = [
             'first_name'            => 'required|min_length[2]|max_length[50]',
             'last_name'             => 'required|min_length[2]|max_length[50]',
-            'email'                 => 'required|valid_email|is_unique[users.email]',
+            'email'                 => 'required|valid_email|is_unique[tbl_users.email]',
             'gender'                => 'required|in_list[male,female]',
             'password'              => 'required|min_length[7]|max_length[20]',
             'password_confirmation' => 'required|matches[password]',
@@ -77,19 +84,20 @@ class Registration extends BaseController
         $data = $this->request->getVar();
 
         try {
-            $data['role_id'] = Role::whereName('Api User')->value('id');
+            $data['role'] = (new Role())->where('role_name', 'User')->first()['role_id'];
             $data['username'] = $data['username'] ?? $data['email'];
-            $data['key'] = uniqid('cf_api-', true);
+            $data['key'] = uniqid('api-', true);
 
             if(!$this->validate($rules, $messages)) {
                 return $this->failValidationErrors($this->validator->getErrors());
             }
 
-            $data['password'] = Password::hash($this->request->getVar('password'));
+            $data['password'] = $this->request->getVar('password');
 
-            $user = User::create($data);
-            $apiUser = $user->apiUser()->create($data);
-            $apiUser->user = $user;
+            (new User())->createUser($data);
+            $user = (new User())->where('email', $data['username'])->first();
+            $data['added_by'] = $user['user_id'];
+            $apiUser = ApiUser::create($data);
 
             return $this->respondCreated($apiUser, 'User created successfully! ✔');
         } catch (Exception $e) {
