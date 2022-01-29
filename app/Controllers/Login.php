@@ -3,9 +3,11 @@
 namespace App\Controllers;
 
 use App\Libraries\OAuth\OAuth;
+use App\Models\ApiUser;
 use App\Models\User;
 use App\Models\UserLogin;
 use CodeIgniter\API\ResponseTrait;
+use CodeIgniter\HTTP\Response;
 use CodeIgniter\HTTP\ResponseInterface;
 use DateTime;
 use DateTimeZone;
@@ -83,15 +85,22 @@ class Login extends BaseController
         return $this->response->setJSON($string);
     }
 
-    public function apiLogin() {
-        $oAuth = new OAuth();
+    public function apiLogin(): Response
+    {
+        $email = $this->request->getVar('email');
+        $password = $this->request->getVar('password');
 
-        $request = new Request();
-        $response = $oAuth->server->handleTokenRequest($request->createFromGlobals());
+        $userModel = new User();
+        $user = $userModel->where('email', $email)->first();
 
-        $code = $response->getStatusCode();
-        $body = $response->getResponseBody();
+        if($password !== $user['password'] ?? null) {
+            return $this->failForbidden('Invalid credentials');
+        }
 
-        return $this->respond(json_decode($body), $code);
+        unset($user['password']);
+
+        $apiKey = ApiUser::whereAddedBy($user['user_id'])->first()['key'];
+
+        return $this->respond(['message' => 'Login successful', 'user' => $user, 'api_key' => $apiKey]);
     }
 }

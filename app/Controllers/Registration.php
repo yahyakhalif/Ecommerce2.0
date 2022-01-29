@@ -6,6 +6,7 @@ use App\Models\ApiUser;
 use App\Models\Role;
 use App\Models\User;
 use CodeIgniter\API\ResponseTrait;
+use CodeIgniter\HTTP\Response;
 use Exception;
 use Illuminate\Support\Facades\Password;
 
@@ -64,7 +65,7 @@ class Registration extends BaseController
         return $this->response->setJSON($string);
     }
 
-    public function apiRegister()
+    public function apiRegister(): Response
     {
         $rules = [
             'first_name'            => 'required|min_length[2]|max_length[50]',

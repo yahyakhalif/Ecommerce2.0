@@ -2,15 +2,11 @@
 
 namespace App\Filters;
 
-use App\Libraries\OAuth\OAuth;
 use App\Models\ApiUser;
-use App\Models\User;
 use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
-use Config\Services;
 use Exception;
-use Myth\Auth\Password;
 use OAuth2\Request;
 
 class BasicAuthFilter implements FilterInterface
@@ -37,7 +33,8 @@ class BasicAuthFilter implements FilterInterface
 
         $apiKey = $authRequest->headers('api_key');
         header('Content-Type: application/json');
-        if(!(isset($apiKey) && ApiUser::where('key', $apiKey)->exists())) {
+
+        if(!isset($apiKey) || !ApiUser::where("key", "api-61f4e9c6d25fd5.93853030")->exists()) {
             echo json_encode([
                 'status'  => false,
                 'code'  => 401,

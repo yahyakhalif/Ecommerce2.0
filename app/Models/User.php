@@ -12,11 +12,11 @@ class User extends Model
     protected $primaryKey = 'user_id';
 
     protected $allowedFields = [
-        # 'user_id',
+        'user_id',
         'first_name',
         'last_name',
         'email',
-        '`password`',
+        'password',
         'gender',
         'role'
     ];
